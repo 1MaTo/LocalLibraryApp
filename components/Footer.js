@@ -8,12 +8,13 @@ const FootTab = styled(FooterTab)`
 `
 
 const FooterIcon = styled(Icon)`
-    ${props => props.name === props.active && `
+    ${props => props.title === props.active && `
         color: ${props.theme.primary.main}
         transform: scale(1.2);
     `}
 `
 const FooterText = styled(Text)`
+    font-size: 9px;
     ${props => props.name === props.active && `
     color: ${props.theme.primary.main}
     transform: scale(1.2);
@@ -27,7 +28,7 @@ const FooterButton = styled(Button)`
 
 export default function MainFooter() {
 
-    const [active, setActive] = useState('apps')
+    const [active, setActive] = useState('books')
 
     const handlePress = (name) => {
         setActive(name)
@@ -36,21 +37,21 @@ export default function MainFooter() {
     return (
         <Footer>
             <FootTab>
-                <FooterButton onPress={() => handlePress('apps')} vertical>
-                    <FooterIcon active={active} name="apps"/>
-                    <FooterText active={active} name="apps">Apps</FooterText>
+                <FooterButton onPress={() => handlePress('books')} vertical>
+                    <FooterIcon title="books" active={active} type="FontAwesome" name="book"/>
+                    <FooterText active={active} name="books">Книги</FooterText>
                 </FooterButton>
-                <FooterButton onPress={() => handlePress('camera')} vertical>
-                    <FooterIcon active={active} name="camera" />
-                    <FooterText active={active} name="camera">Camera</FooterText>
+                <FooterButton onPress={() => handlePress('library')} vertical>
+                    <FooterIcon title="library" active={active} type="MaterialCommunityIcons" name="library-shelves" />
+                    <FooterText active={active} name="library">Список книг</FooterText>
                 </FooterButton>
-                <FooterButton onPress={() => handlePress('navigate')} vertical>
-                    <FooterIcon active={active} name="navigate" />
-                    <FooterText active={active} name="navigate">Navigate</FooterText>
+                <FooterButton onPress={() => handlePress('notifications')} vertical>
+                    <FooterIcon title="notifications" active={active} name="notifications" />
+                    <FooterText active={active} name="notifications">Уведомления</FooterText>
                 </FooterButton>
-                <FooterButton onPress={() => handlePress('person')} vertical>
-                    <FooterIcon active={active} name="person" />
-                    <FooterText active={active} name="person">Contact</FooterText>
+                <FooterButton onPress={() => handlePress('options')} vertical>
+                    <FooterIcon title="options" active={active} type="FontAwesome" name="gear" />
+                    <FooterText active={active} name="options">Настройки</FooterText>
                 </FooterButton>
             </FootTab>
         </Footer>

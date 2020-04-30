@@ -1,6 +1,7 @@
 const theme = {
     first: {
         primary: {
+            light: '#FAABAC',
             main: '#ED565D',
             unhover: '#ed565d80',
             dark: '#DC4D54',

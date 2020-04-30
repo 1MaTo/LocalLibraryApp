@@ -2,8 +2,9 @@ import React from 'react';
 import Home from './Home'
 import Initialize from './Initialize'
 import Login from './Login'
-import { NativeRouter, Route, Redirect } from "react-router-native";
+import { NativeRouter, Route, Redirect, BackButton } from "react-router-native";
 import { useSelector } from 'react-redux';
+import Account from './Account'
 
 
 export default function Routes() {
@@ -31,11 +32,16 @@ export default function Routes() {
 
     return (
         <NativeRouter>
-            <Route exact path="/" component={Initialize} />
-            <PrivateRoute exact path="/home">
-                <Home />
-            </PrivateRoute>
-            <Route exact path="/login" component={Login} />
+            <BackButton>
+                <Route exact path="/" component={Initialize} />
+                <PrivateRoute exact path="/home">
+                    <Home />
+                </PrivateRoute>
+                <PrivateRoute exact path="/account">
+                    <Account />
+                </PrivateRoute>
+                <Route exact path="/login" component={Login} />
+            </BackButton>
         </NativeRouter>
     );
 }

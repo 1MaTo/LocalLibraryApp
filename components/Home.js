@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components'
-import { Button, Text, Header, Left, Body, Right } from 'native-base'
-import { useDispatch } from 'react-redux'
+import { Button, Text, Header, Left, Body, Right, Container, Thumbnail } from 'native-base'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import MainFooter from './Footer'
 import { Avatar } from 'react-native-material-ui';
-import { StatusBar } from 'react-native'
 import theme from '../theme/theme'
+import { AntDesign } from '@expo/vector-icons';
+import MainHeader from './Header'
+import { useUpdate } from './store/updateStore'
+
 
 const StyledView = styled.View`
     background-color: ${props => props.theme.background.main}; 
@@ -20,46 +23,27 @@ const Title = styled.Text`
     color: ${props => props.theme.primary.main};
 `
 
-const UserAvatar = styled(Avatar)`
-  margin-right: auto;
-`
-
-const ToolBar = styled(Header)`
-  width: 100%;
-  background: ${props => props.theme.primary.main};
-`
-
-const ToolbarBody = styled(Text)`
-`
-
 export default function Home() {
 
-  const dispatch = useDispatch()
+  const updateUserData = useUpdate('USER')
+  const [activeSection, setActiveSection] = useState('books')
+  const [sectionContent] = useState({
+    book: {
+      icon: "book",
+      headerIcon: "book",
+      text: "Книги"
+    }
+  })
 
-  const handleLogOut = () => {
-    axios
-      .post('api/logout')
-      .then(response => {
-        dispatch({ type: "SET_USER", user: null })
-        dispatch({ type: "SET_LOGIN", isLogin: false })
-        console.log('logOut')
-      })
-  }
+  useEffect(() => {
+    updateUserData()
+  }, [])
 
   return (
     <StyledView>
-      <ToolBar primary>
-        <Left>
-          <Text>Книги</Text>
-        </Left>
-      </ToolBar>
+      <MainHeader iconType="AntDesign" icon="book" headerText="Книги"/>
       <Title>Welcome to home page</Title>
-      <Button onPress={handleLogOut}>
-        <Text>
-          Выйти
-        </Text>
-      </Button>
-      <MainFooter />
-    </StyledView>
+      <MainFooter setActiveSection={setActiveSection}/>
+    </StyledView >
   );
 }
