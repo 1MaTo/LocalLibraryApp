@@ -9,6 +9,8 @@ import theme from '../theme/theme'
 import { AntDesign } from '@expo/vector-icons';
 import MainHeader from './Header'
 import { useUpdate } from './store/updateStore'
+import BookPage from './BookPage'
+import UserBookList from './UserBookList'
 
 
 const StyledView = styled.View`
@@ -23,27 +25,45 @@ const Title = styled.Text`
     color: ${props => props.theme.primary.main};
 `
 
+const PageBackground = styled.View`
+  flex: 1;
+`
+
 export default function Home() {
 
   const updateUserData = useUpdate('USER')
-  const [activeSection, setActiveSection] = useState('books')
-  const [sectionContent] = useState({
-    book: {
-      icon: "book",
-      headerIcon: "book",
-      text: "Книги"
-    }
+  const [activeSection, setActiveSection] = useState({
+    name: "books",
+    headerIcon: "book",
+    headerIconType: "AntDesign",
+    headerText: "Книги"
   })
 
   useEffect(() => {
     updateUserData()
   }, [])
 
+  const GetActivePage = () => {
+    switch (activeSection.name) {
+      case "books":
+        return <BookPage />;
+      case "library":
+        return <UserBookList />;
+      default:
+        return <Title>Not complete yet</Title>;
+    }
+  }
+
   return (
     <StyledView>
-      <MainHeader iconType="AntDesign" icon="book" headerText="Книги"/>
-      <Title>Welcome to home page</Title>
-      <MainFooter setActiveSection={setActiveSection}/>
+      <MainHeader
+        iconType={activeSection.headerIconType}
+        icon={activeSection.headerIcon}
+        headerText={activeSection.headerText} />
+      <PageBackground>
+        <GetActivePage />
+      </PageBackground>
+      <MainFooter setActiveSection={setActiveSection} />
     </StyledView >
   );
 }

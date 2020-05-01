@@ -26,19 +26,47 @@ const FooterButton = styled(Button)`
     border-radius: 0px;
 `
 
-export default function MainFooter() {
+export default function MainFooter({ setActiveSection }) {
 
     const [active, setActive] = useState('books')
 
+    const [pagesSettings] = useState({
+        books: {
+            name: "books",
+            headerIcon: "book",
+            headerIconType: "AntDesign",
+            headerText: "Книги"
+        },
+        library: {
+            name: "library",
+            headerIcon: "library-shelves",
+            headerIconType: "MaterialCommunityIcons",
+            headerText: "Библиотека"
+        },
+        notifications: {
+            name: "notifications",
+            headerIcon: "notifications",
+            headerIconType: "Ionicons",
+            headerText: "Уведомления"
+        },
+        options: {
+            name: "options",
+            headerIcon: "gear",
+            headerIconType: "FontAwesome",
+            headerText: "Настройки"
+        }
+    })
+
     const handlePress = (name) => {
         setActive(name)
+        setActiveSection(pagesSettings[name])
     }
 
     return (
         <Footer>
             <FootTab>
                 <FooterButton onPress={() => handlePress('books')} vertical>
-                    <FooterIcon title="books" active={active} type="FontAwesome" name="book"/>
+                    <FooterIcon title="books" active={active} type="FontAwesome" name="book" />
                     <FooterText active={active} name="books">Книги</FooterText>
                 </FooterButton>
                 <FooterButton onPress={() => handlePress('library')} vertical>

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Text, Header, Left, Button, Body, Right, Container, Thumbnail, Icon } from 'native-base'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-native';
+import { TouchableOpacity } from 'react-native'
 
 const ToolBar = styled(Header)`
   width: 100%;
@@ -40,10 +41,10 @@ const UserAvatar = styled(Thumbnail)`
   height: 45px;
 `
 
-export default function MainHeader({ path = "home", iconType, icon, headerText }) {
+export default function MainHeader({ replace = false, iconType, icon, headerText }) {
 
   const userImage = useSelector(state => state.user ? state.user.avatar : null)
-  const userInitialAvatar = useSelector(state => state.user !== null ? state.user.firstName[0] + state.user.secondName[0] : 'kek')
+  const userInitialAvatar = useSelector(state => state.user !== null ? state.user.firstName[0] + state.user.secondName[0] : '')
 
   const handlePress = () => {
 
@@ -59,7 +60,7 @@ export default function MainHeader({ path = "home", iconType, icon, headerText }
       </Body>
       <Right>
         <AvatarButton rounded onPress={handlePress}>
-          <Link to="account">
+          <Link component={TouchableOpacity} activeOpacity={0.5} replace={replace} to="account">
             {userImage ?
               <UserAvatar small source={{ uri: userImage }} /> :
               <UserInitials>

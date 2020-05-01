@@ -18,7 +18,7 @@ export function useUpdate(type) {
                 console.log('User not logged in')
             })
 
-    const userList = () => {
+    const userList = () =>
         axios
             .get('/api/users/')
             .then((response) => {
@@ -29,13 +29,26 @@ export function useUpdate(type) {
             .catch(error => {
                 console.log('Ошибка при получении списка пользователей', error)
             })
-    }
+
+    const bookList = () =>
+        axios
+            .get('/api/books/')
+            .then((response) => {
+                if (response.status === 200) {
+                    dispatch({ type: "SET_BOOKS", books: response.data })
+                }
+            })
+            .catch(error => {
+                console.log('Cant get books')
+            })
 
     switch (type) {
         case 'USER':
             return user
         case 'USERLIST':
             return userList
+        case 'BOOKS':
+            return bookList
         default:
             return false
     }
