@@ -4,15 +4,11 @@ import { useSelector } from 'react-redux'
 import { Spinner, Container } from 'native-base'
 import BookItem from './BookItem'
 import { useUpdate } from './store/updateStore'
+import { FlatList } from 'react-native'
+import theme from '../theme/theme'
 
 const Loading = styled(Spinner)`
     margin: auto;
-`
-const ListBackground = styled(Container)`
-    background: ${props => props.theme.background.main};
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
 `
 
 export default function BookPage() {
@@ -23,14 +19,23 @@ export default function BookPage() {
 
     useEffect(() => {
         updateBooks()
-        console.log(books)
         setLoading(false)
     }, [])
 
+
     return (
-        isLoading ? <Loading /> : 
-        <ListBackground>
-            {books.map(book => <BookItem key={book.id} data={book}/>)}
-        </ListBackground>
+        isLoading ? <Loading /> :
+            <FlatList
+                data={books}
+                keyExtractor={item => item.id.toString()}
+                numColumns={3}
+                renderItem={({ item }) => (
+                    <BookItem
+                        id={item.id}
+                        avatar={item.avatar}
+                        name={item.name}
+                        amount={item.amount}
+                        key={item.id} />
+                )} />
     )
 }

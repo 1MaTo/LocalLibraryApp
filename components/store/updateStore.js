@@ -42,6 +42,12 @@ export function useUpdate(type) {
                 console.log('Cant get books')
             })
 
+    const bookReadingStat = (id) =>
+        axios.get(`/api/book/users/reading/${id}`)
+
+    const getBookInfo = (id) =>
+        axios.get(`api/book/${id}`)
+
     switch (type) {
         case 'USER':
             return user
@@ -49,6 +55,10 @@ export function useUpdate(type) {
             return userList
         case 'BOOKS':
             return bookList
+        case 'BOOK_READING_STAT':
+            return bookReadingStat
+        case 'GET_BOOK':
+            return getBookInfo
         default:
             return false
     }

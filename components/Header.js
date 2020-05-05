@@ -46,10 +46,6 @@ export default function MainHeader({ replace = false, iconType, icon, headerText
   const userImage = useSelector(state => state.user ? state.user.avatar : null)
   const userInitialAvatar = useSelector(state => state.user !== null ? state.user.firstName[0] + state.user.secondName[0] : '')
 
-  const handlePress = () => {
-
-  }
-
   return (
     <ToolBar primary>
       <Left>
@@ -59,7 +55,7 @@ export default function MainHeader({ replace = false, iconType, icon, headerText
         <HeaderText>{headerText}</HeaderText>
       </Body>
       <Right>
-        <AvatarButton rounded onPress={handlePress}>
+        <AvatarButton rounded>
           <Link component={TouchableOpacity} activeOpacity={0.5} replace={replace} to="account">
             {userImage ?
               <UserAvatar small source={{ uri: userImage }} /> :

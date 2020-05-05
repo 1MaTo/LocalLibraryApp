@@ -5,6 +5,7 @@ import Login from './Login'
 import { NativeRouter, Route, Redirect, BackButton } from "react-router-native";
 import { useSelector } from 'react-redux';
 import Account from './Account'
+import SingleBook from './SingleBook'
 
 
 export default function Routes() {
@@ -40,6 +41,7 @@ export default function Routes() {
                 <PrivateRoute exact path="/account">
                     <Account />
                 </PrivateRoute>
+                <Route exact path="/book/:id" component={SingleBook} />
                 <Route exact path="/login" component={Login} />
             </BackButton>
         </NativeRouter>

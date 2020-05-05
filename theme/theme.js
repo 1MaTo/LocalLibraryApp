@@ -9,6 +9,7 @@ const theme = {
         }, // Purple and green play nicely together.
         secondary: {
             main: '#544759',
+            dark: '#46394B'
         }, // This is just green.A700 as hex.
         error: {
             main: '#f44336'
