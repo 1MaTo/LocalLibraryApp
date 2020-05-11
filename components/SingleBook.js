@@ -106,6 +106,14 @@ const DateText = styled.Text`
     font-size: 10px;
 `
 
+const BookButton = styled(Button)`
+    width: 200px;
+    height: 40px;
+    margin: auto;
+    justify-content: center;
+    margin-top: 10px;
+`
+
 export default function SingleBook({ match }) {
 
     const [isLoading, setLoading] = useState(true)
@@ -136,20 +144,11 @@ export default function SingleBook({ match }) {
                                 resizeMode="stretch"
                                 source={{ uri: book.avatar }} />
                         </ImageWrapper>
-                        <DateUpdateBlock>
-                            <DateText>
-                                {`Последнее обновление - ${book.lastUpdate}`}
-                            </DateText>
-                        </DateUpdateBlock>
-                        <DatePublicBlock>
-                            <DateText>
-                                {`Добавлена - ${book.publicDate}`}
-                            </DateText>
-                        </DatePublicBlock>
+
                     </UpperView>
                     <DownView>
                         <BookName>{book.name}</BookName>
-
+                        <BookButton><Text>Взять книгу</Text></BookButton>
                         <Title>{"О книге"}</Title>
                         <BookDescription>{book.about}</BookDescription>
                         <Title>{"Авторы"}</Title>

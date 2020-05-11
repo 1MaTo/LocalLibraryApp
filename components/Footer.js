@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text } from 'native-base';
+import { Badge, Container, Header, Content, Footer, FooterTab, Button, Icon, Text } from 'native-base';
 import styled from 'styled-components'
 
 const FootTab = styled(FooterTab)`
@@ -73,7 +73,10 @@ export default function MainFooter({ setActiveSection }) {
                     <FooterIcon title="library" active={active} type="MaterialCommunityIcons" name="library-shelves" />
                     <FooterText active={active} name="library">Список книг</FooterText>
                 </FooterButton>
-                <FooterButton onPress={() => handlePress('notifications')} vertical>
+                <FooterButton badge onPress={() => handlePress('notifications')} vertical>
+                    <Badge>
+                        <Text>2</Text>
+                    </Badge>
                     <FooterIcon title="notifications" active={active} name="notifications" />
                     <FooterText active={active} name="notifications">Уведомления</FooterText>
                 </FooterButton>

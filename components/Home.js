@@ -11,6 +11,7 @@ import MainHeader from './Header'
 import { useUpdate } from './store/updateStore'
 import BookPage from './BookPage'
 import UserBookList from './UserBookList'
+import Notifications from './Notifications'
 
 
 const StyledView = styled.View`
@@ -49,6 +50,8 @@ export default function Home() {
         return <BookPage />;
       case "library":
         return <UserBookList />;
+      case "notifications":
+        return <Notifications />
       default:
         return <Title>Not complete yet</Title>;
     }
